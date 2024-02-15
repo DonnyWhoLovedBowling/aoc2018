@@ -1,3 +1,7 @@
+"""
+--- Day 5: Alchemical Reduction ---
+"""
+
 from string import ascii_lowercase
 
 

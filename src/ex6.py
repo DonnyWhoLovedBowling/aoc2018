@@ -1,3 +1,6 @@
+"""
+--- Day 6: Chronal Coordinates ---
+"""
 lines = [n.replace('\n', '') for n in open('../data/ex6.txt', 'r').readlines()]
 
 xs = [int(line.split(', ')[0]) for line in lines]

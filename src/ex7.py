@@ -1,3 +1,7 @@
+"""
+--- Day 7: The Sum of Its Parts ---
+"""
+
 import string
 
 
@@ -57,14 +61,14 @@ ans_list = []
 total_time = 0
 
 if len(all_nodes) == 6:
-    max_workers = 2
+    MAX_WORKERS = 2
 else:
-    max_workers = 5
+    MAX_WORKERS = 5
 
 
 def run(pt2=False):
     options = sorted(list(all_nodes.difference(set(req_dict.keys()))), reverse=True)
-    global ans_list, total_time, max_workers
+    global ans_list, total_time, MAX_WORKERS
     worker_list = []
     while len(ans_list) < len(all_nodes):
         if pt2:
@@ -80,7 +84,7 @@ def run(pt2=False):
             worker_list = new_workers
             options += new_options
             options.sort(reverse=True)
-            while len(worker_list) < max_workers and options:
+            while len(worker_list) < MAX_WORKERS and options:
                 worker_list.append(Worker(options.pop()))
             if len(ans_list) < len(all_nodes):
                 total_time += 1
@@ -96,5 +100,4 @@ ans_pt1 = ''.join(ans_list)
 print(f"ans pt1 = {ans_pt1}")
 ans_list = []
 run(True)
-print(''.join(ans_list))
 print(f"ans pt2 = {total_time}")

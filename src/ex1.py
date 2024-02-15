@@ -1,3 +1,6 @@
+"""
+--- Day 1: Chronal Calibration ---
+"""
 numbers = [int(n.replace('\n', '')) for n in open('../data/ex1.txt', 'r').readlines()]
 print("ans1 = ", sum(numbers))
 

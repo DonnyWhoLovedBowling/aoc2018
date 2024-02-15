@@ -1,3 +1,6 @@
+"""
+--- Day 3: No Matter How You Slice It ---
+"""
 codes = [n.replace('\n', '') for n in open('../data/ex3.txt', 'r').readlines()]
 counter = dict()
 claims: list[set] = list()

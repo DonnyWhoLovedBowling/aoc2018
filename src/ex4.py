@@ -1,23 +1,28 @@
+"""
+--- Day 4: Repose Record ---
+"""
+
 import os
 from datetime import datetime, timedelta
 from copy import deepcopy as dc
 
 print(os.getcwd())
-lines = [n.replace('\n', '') for n in open('../data/ex4.txt', 'r').readlines()]
-sleep_time = dict()
-sleep_minute = dict()
+with open('../data/ex4.txt', 'r', encoding='utf-8') as f:
+    lines = [n.replace('\n', '') for n in f.readlines()]
+
+sleep_time = {}
+sleep_minute = {}
 start_time = datetime(1, 1, 1)
 start_minute = -1
 guard = ''
-messages = list()
+messages = []
 minute_range = {k: 0 for k in range(0, 60)}
 
-
-for l in lines:
-    ts_txt = l.split(']')[0]
+for line in lines:
+    ts_txt = line.split(']')[0]
     ts_txt = ts_txt[1:]
     ts = datetime.strptime(ts_txt, '%Y-%m-%d %H:%M')
-    m = l.split(']')[1]
+    m = line.split(']')[1]
     messages.append((ts, m))
 
 messages.sort(key=lambda tup: tup[0])
@@ -25,7 +30,6 @@ messages.sort(key=lambda tup: tup[0])
 
 for e in messages:
     t, m = e
-    # print(t.strftime('[%Y-%m-%d %H:%M]'), m)
     ix = m.find('#')
     if ix != -1:
         if start_minute != -1:
@@ -56,28 +60,26 @@ for e in messages:
                 sleep_minute[guard][mn] += 1
             start_minute = -1
 
-max_time = 0
-max_guard = ''
+MAX_TIME = 0
+MAX_GUARD = ''
 for k, v in sleep_time.items():
     minutes = int(v.total_seconds())/60
-    if minutes > max_time:
-        max_time = minutes
-        max_guard = k
+    if minutes > MAX_TIME:
+        MAX_TIME = minutes
+        MAX_GUARD = k
 
-max_minute = max(sleep_minute[max_guard].values())
-# print(sleep_minute[max_guard])
-for k, v in sleep_minute[max_guard].items():
-    # print(f"{k}: {v}")
-    if v == max_minute:
-        print(f"ans pt 1 = {k * int(max_guard)}")
+MAX_MINUTE = max(sleep_minute[MAX_GUARD].values())
+for k, v in sleep_minute[MAX_GUARD].items():
+    if v == MAX_MINUTE:
+        print(f"ans pt 1 = {k * int(MAX_GUARD)}")
 
-max_minute = 0
-max_times = 0
+MAX_MINUTE = 0
+MAX_TIMES = 0
 for guard in sleep_minute.keys():
     for k, v in sleep_minute[guard].items():
-        if v > max_times:
-            max_times = v
-            max_minute = k
-            max_guard = guard
-print(f"ans pt 2 = {max_minute * int(max_guard)}")
+        if v > MAX_TIMES:
+            MAX_TIMES = v
+            MAX_MINUTE = k
+            MAX_GUARD = MAX_GUARD
+print(f"ans pt 2 = {MAX_MINUTE * int(MAX_GUARD)}")
 

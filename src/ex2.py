@@ -1,3 +1,6 @@
+"""
+--- Day 2: Inventory Management System ---
+"""
 from collections import Counter
 import difflib
 
