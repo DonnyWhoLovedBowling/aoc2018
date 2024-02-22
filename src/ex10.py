@@ -41,6 +41,6 @@ for s in range(15000):
         print(min_x, max_x, min_y, max_y)
     if (max_x-min_x) < 100 and (max_y-min_y) < 100:
         print_positions(positions, min_x, max_x, min_y, max_y)
-        print()
+        print(f"#seconds: {s}")
         # do_break = True
         # break
