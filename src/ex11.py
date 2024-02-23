@@ -10,9 +10,9 @@ max_range = 300
 lookup = {}
 
 
-def calc_power_grid(_x, _y, _size, pt):
+def calc_power_grid(_x, _y, _size):
     global lookup
-    if (_x, _y, _size-1) in lookup and pt == 2:
+    if (_x, _y, _size-1) in lookup:
         total_power = lookup[(_x, _y, _size-1)]
         x = (_x + _size) - 1
         for y in range(_y, (_y + _size) - 1):
@@ -20,12 +20,12 @@ def calc_power_grid(_x, _y, _size, pt):
         y = (_y + _size) - 1
         for x in range(_x, (_x + _size)):
             total_power += powers[(x, y)]
-    elif (_x-1, _y, _size) in lookup and pt == 2:
+    elif (_x-1, _y, _size) in lookup:
         total_power = lookup[(_x-1, _y, _size)]
         for y in range(_y, (_y + _size)):
             total_power -= powers[(_x - 1, y)]
             total_power += powers[((_x + _size) - 1, y)]
-    elif (_x, _y-1, _size) in lookup and pt == 2:
+    elif (_x, _y-1, _size) in lookup:
         total_power = lookup[(_x, _y - 1, _size)]
         for x in range(_x, (_x + _size)):
             total_power -= powers[(x, _y - 1)]
@@ -67,7 +67,7 @@ def run(pt):
             continue
         for x in range(1, (max_range-size)+1):
             for y in range(1, (max_range-size)+1):
-                power = calc_power_grid(x, y, size, pt)
+                power = calc_power_grid(x, y, size)
                 if power > max_power:
                     max_power = power
                     max_coor = (x, y, size)
